@@ -1,0 +1,31 @@
+spring.cloud.stream:
+  kafka:
+    binder:
+      consumerProperties:
+        isolation.level: read_committed
+        autoCreateTopics: false
+    bindings:
+      LoggingProducer:
+        producer:
+          configuration:
+            acks: all
+            delivery.timeout.ms: 1000
+            max.block.ms: 1000
+            request.timeout.ms: 1000
+            retry.backoff.ms: 50
+            retries: 10
+      LoggingConsumer:
+        consumer:
+          autoCommitOffset: true
+          autoCommitOnError: false
+          configuration:
+            max.poll.records: 1
+            max.poll.interval.ms: 30000
+  bindings:
+    LoggingProducer:
+      destination: logging
+      binder: batchKafka
+    LoggingConsumer:
+      destination: logging
+      group: kafka
+      binder: batchKafka
