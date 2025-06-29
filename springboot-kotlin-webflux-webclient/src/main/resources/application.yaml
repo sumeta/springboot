@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: springboot-webclient
+  codec:
+    max-in-memory-size: -1
+  profiles:
+    active: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+ws-client:
+  ipify:
+    url: "https://api.ipify.org/?format=json"
+  worker:
+    url: "https://myip.myhost.workers.dev"
